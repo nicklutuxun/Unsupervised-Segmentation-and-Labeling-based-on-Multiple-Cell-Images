@@ -1,13 +1,13 @@
-from torchvision.models import resnet50, ResNet50_Weights
+from torchvision.models import resnet50, ResNet50_Weights, resnet152, ResNet152_Weights, vgg19_bn, VGG19_BN_Weights
 from PIL import Image
 import os
 import torch
 import numpy as np
 
 def extract_feature(dir):
-    weights = ResNet50_Weights.IMAGENET1K_V1
+    weights = ResNet152_Weights.IMAGENET1K_V2
     preprocess = weights.transforms()
-    model = resnet50(weights=weights)
+    model = resnet152(weights=weights)
     print("ResNet loaded!")
 
     feature_list = []
@@ -24,12 +24,10 @@ def extract_feature(dir):
     #         output = model(batch_t)
     #         output = np.squeeze(output.detach().numpy())
     #         feature_list.append(output)
-    #     print(count)
 
     for image in os.listdir(dir):
         img = Image.open(dir+image)
         img = img.convert('RGB')
-        print(img)
         img_transformed = preprocess(img)
         batch_t = torch.unsqueeze(img_transformed, 0)
         output = model(batch_t)
@@ -40,3 +38,13 @@ def extract_feature(dir):
         
 
     return feature_list
+
+
+def extract_feature_img(img, model, preprocess):
+    img = img.convert('RGB')
+    img_transformed = preprocess(img)
+    batch_t = torch.unsqueeze(img_transformed, 0)
+    output = model(batch_t)
+    output = np.squeeze(output.detach().numpy())
+
+    return output
