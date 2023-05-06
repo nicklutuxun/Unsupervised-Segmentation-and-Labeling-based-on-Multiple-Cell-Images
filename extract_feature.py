@@ -15,22 +15,28 @@ def extract_feature(dir):
     model.eval()
 
     count = 0
-    for subdir in os.listdir(dir):
-        print(subdir)
-        for image in os.listdir(dir+"/"+subdir):
-            img = Image.open(dir+"/"+subdir+"/"+image)
-            # img = cv2.imread("./images/"+subdir+"/"+image, )
-            # print(img.shape)
-            img_transformed = preprocess(img)
-            batch_t = torch.unsqueeze(img_transformed, 0)
-            output = model(batch_t)
-            output = np.squeeze(output.detach().numpy())
-            # torch.save(output, f'./features/tensor_{image}.pt')
-            feature_list.append(output)
+    # for subdir in os.listdir(dir):
+    #     print(subdir)
+    #     for image in os.listdir(dir+"/"+subdir):
+    #         img = Image.open(dir+"/"+subdir+"/"+image)
+    #         img_transformed = preprocess(img)
+    #         batch_t = torch.unsqueeze(img_transformed, 0)
+    #         output = model(batch_t)
+    #         output = np.squeeze(output.detach().numpy())
+    #         feature_list.append(output)
+    #     print(count)
+
+    for image in os.listdir(dir):
+        img = Image.open(dir+image)
+        img = img.convert('RGB')
+        print(img)
+        img_transformed = preprocess(img)
+        batch_t = torch.unsqueeze(img_transformed, 0)
+        output = model(batch_t)
+        output = np.squeeze(output.detach().numpy())
+        feature_list.append(output)
         print(count)
-        # count = count+1
-        # if count == 2:
-        #     break
+        count = count + 1
         
 
     return feature_list
