@@ -40,11 +40,11 @@ def extract_feature(dir):
     return feature_list
 
 
-def extract_feature_img(img, model, preprocess):
+def extract_feature_img(img, classifier, preprocess):
     img = img.convert('RGB')
     img_transformed = preprocess(img)
     batch_t = torch.unsqueeze(img_transformed, 0)
-    output = model(batch_t)
+    output = classifier(batch_t)
     output = np.squeeze(output.detach().numpy())
 
     return output

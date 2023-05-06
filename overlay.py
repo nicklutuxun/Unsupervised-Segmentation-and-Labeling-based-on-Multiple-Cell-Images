@@ -12,7 +12,7 @@ print("ResNet loaded!")
 
 model.eval()
 
-def overlay(img, seg, model):
+def overlay(img, seg, classifier):
     classes = np.unique(seg)
     overlay_masks = []
     
@@ -27,7 +27,7 @@ def overlay(img, seg, model):
 
         cell_img = Image.fromarray(cell, "RGB")
         feature = extract_feature_img(cell_img, model, preprocess).reshape(1, -1).astype(np.float64)
-        label = model.predict(feature)
+        label = classifier.predict(feature)
         overlay_mask = c * (label+1)
         overlay_masks.append(overlay_mask)
     
