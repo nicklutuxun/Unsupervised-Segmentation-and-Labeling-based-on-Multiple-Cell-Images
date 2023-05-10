@@ -3,10 +3,16 @@ from extract_feature import extract_feature_img
 from PIL import Image
 import matplotlib.pyplot as plt
 import pickle
+from torchvision import transforms
 from torchvision.models import resnet50, ResNet50_Weights, resnet152, ResNet152_Weights, vgg19_bn, VGG19_BN_Weights
 
 weights = ResNet152_Weights.IMAGENET1K_V2
-preprocess = weights.transforms()
+# preprocess = weights.transforms()
+preprocess = transforms.Compose([
+        transforms.Resize(224),
+        transforms.ToTensor(),
+        # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+])
 model = resnet152(weights=weights)
 print("ResNet loaded!")
 
