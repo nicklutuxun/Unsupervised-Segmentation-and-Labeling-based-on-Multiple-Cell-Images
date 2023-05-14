@@ -33,6 +33,7 @@ def extract_feature(dir):
     #         feature_list.append(output)
 
     for image in os.listdir(dir):
+        print(count, image)
         # image = "57.png"
         img = Image.open(dir+image)
         img = img.convert('RGB')
@@ -53,7 +54,6 @@ def extract_feature(dir):
         output = model(batch_t)
         output = np.squeeze(output.detach().numpy())
         feature_list.append(output)
-        print(count)
         count = count + 1
         
     return feature_list
@@ -75,7 +75,7 @@ def extract_feature_img(img, classifier, preprocess):
 def pad_img(img):
     h, w, c = img.shape
     max_dim = max(h,w)
-    # max_dim = 400
+    # max_dim = 416
     pad_h = (max_dim - h) // 2
     pad_w = (max_dim - w) // 2
     padded_img = np.pad(img, ((pad_h, pad_h), (pad_w, pad_w), (0, 0)), mode='constant')
