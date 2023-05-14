@@ -2,9 +2,8 @@ import numpy as np
 from extract_feature import extract_feature_img
 from PIL import Image
 import matplotlib.pyplot as plt
-import pickle
 from torchvision import transforms
-from torchvision.models import resnet50, ResNet50_Weights, resnet152, ResNet152_Weights, vgg19_bn, VGG19_BN_Weights
+from torchvision.models import resnet152, ResNet152_Weights
 
 weights = ResNet152_Weights.IMAGENET1K_V2
 # preprocess = weights.transforms()
@@ -63,10 +62,6 @@ def get_center(mask):
     x_center = int((x_min + x_max) / 2) + 18
     y_center = int((y_min + y_max) / 2) - 9
     return x_center, y_center
-
-mask = np.array([[0,0,0,1,0,0], [0,1,1,1,1,0], [0,0,1,1,1,0], [0,0,0,1,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]])
-print(get_center(mask))
-
 
 
 

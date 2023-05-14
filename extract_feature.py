@@ -3,7 +3,6 @@ from PIL import Image
 import os
 import torch
 import numpy as np
-import matplotlib.pyplot as plt
 from torchvision import transforms
 
 def extract_feature(dir):
@@ -22,18 +21,8 @@ def extract_feature(dir):
     model.eval()
 
     count = 0
-    # for subdir in os.listdir(dir):
-    #     print(subdir)
-    #     for image in os.listdir(dir+"/"+subdir):
-    #         img = Image.open(dir+"/"+subdir+"/"+image)
-    #         img_transformed = preprocess(img)
-    #         batch_t = torch.unsqueeze(img_transformed, 0)
-    #         output = model(batch_t)
-    #         output = np.squeeze(output.detach().numpy())
-    #         feature_list.append(output)
 
     for image in os.listdir(dir):
-        print(count, image)
         # image = "57.png"
         img = Image.open(dir+image)
         img = img.convert('RGB')
@@ -54,6 +43,7 @@ def extract_feature(dir):
         output = model(batch_t)
         output = np.squeeze(output.detach().numpy())
         feature_list.append(output)
+        print("Finished: ", count)
         count = count + 1
         
     return feature_list
