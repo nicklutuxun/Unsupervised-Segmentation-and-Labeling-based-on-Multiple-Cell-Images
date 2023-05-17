@@ -17,7 +17,7 @@ By combining deep learning and color analysis, we expect to achieve more accurat
 The preprocessing steps for the experimental data are as follows:
 
 <p align="center">
-  <img width="700" src="fig1.png">
+  <img width="750" src="https://github.com/nicklutuxun/Unsupervised-Segmentation-and-Labeling-based-on-Multiple-Cell-Images/assets/41639441/f574ae21-1c6a-4ac5-a79e-c6372c564727">
 </p>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(a)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(b)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(c)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;(d)
 
